@@ -22,11 +22,20 @@ Scene.prototype.desenhar = function(){
     }
 }
 
+Scene.prototype.cenario = function(){
+    this.ctx.strokeStyle = "black";
+    this.ctx.lineWidth = 1;
+    this.ctx.fillStyle = "tan";
+    this.ctx.fillRect(0, 0, canvas.width, canvas.height);
+    this.ctx.strokeRect(0, 0, canvas.width, canvas.height);
+}
+
 Scene.prototype.limpar = function(){
     this.ctx.clearRect(0, 0, this.w, this.h);
 }
 
 Scene.prototype.passo = function(){
     this.limpar();
+    this.cenario();
     this.desenhar();
 }
