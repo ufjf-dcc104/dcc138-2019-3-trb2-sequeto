@@ -1,6 +1,7 @@
 function Scene(params) {
     var exemplo = {
         sprites: [],
+        toRemove: [],
         ctx: null,
         w: 300,
         h: 300
@@ -22,6 +23,12 @@ Scene.prototype.desenhar = function(){
     }
 }
 
+Scene.prototype.mover = function (dt) {
+    for (var i = 0; i < this.sprites.length; i++) {
+        this.sprites[i].mover(dt);
+    }
+}
+
 Scene.prototype.cenario = function(){
     this.ctx.strokeStyle = "black";
     this.ctx.lineWidth = 1;
@@ -34,8 +41,20 @@ Scene.prototype.limpar = function(){
     this.ctx.clearRect(0, 0, this.w, this.h);
 }
 
+Scene.prototype.removeSprites = function () {
+    for (var i = 0; i < this.toRemove.length; i++) {
+        var idx = this.sprites.indexOf(this.toRemove[i]);
+        if (idx >= 0) {
+            this.sprites.splice(idx, 1);
+        }
+    }
+    this.toRemove = [];
+};
+
 Scene.prototype.passo = function(){
     this.limpar();
     this.cenario();
+    this.mover(dt);
     this.desenhar();
+    this.removeSprites();
 }
