@@ -11,10 +11,26 @@
     <canvas/>
 
     <script>
-        var canvas = document.querySelector("Canvas");
+        var canvas = document.querySelector("canvas");
         canvas.width = 600;
         canvas.height = 400;
         var ctx = canvas.getContext("2d");
+        var dt, anterior = 0;
+
+        var personagem = new Sprite({x:10, y:10, w:20, h:20});
+        var cena = new Scene({w:canvas.widht, h:canvas.height, ctx:ctx});
+        cena.desenhar();
+
+        cena.adicionar(personagem);
+
+        function passo(t){
+            dt = (t - anterior)/1000;
+            cena.passo(dt);
+            anterior = t;
+            requestAnimationFrame(passo);
+        }
+
+        requestAnimationFrame(passo);
     </script>
     
 </body>

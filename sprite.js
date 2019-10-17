@@ -14,3 +14,11 @@ function Sprite(params = {}) {
 }
 Sprite.prototype = new Sprite();
 Sprite.prototype.constructor = Sprite;
+
+Sprite.prototype.desenhar = function(ctx){
+    ctx.fillStyle = "blue";
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 1;
+    ctx.fillRect(this.x, this.y, this.w, this.h);
+    ctx.strokeRect(this.x, this.y, this.w, this.h);
+}
