@@ -29,6 +29,14 @@ Scene.prototype.mover = function (dt) {
     }
 }
 
+Scene.prototype.comportamento = function () {
+    for (var i = 0; i < this.sprites.length; i++) {
+        if (this.sprites[i].comportamento) {
+            this.sprites[i].comportamento();
+        }
+    }
+}
+
 Scene.prototype.cenario = function(){
     this.ctx.strokeStyle = "black";
     this.ctx.lineWidth = 1;
@@ -54,6 +62,7 @@ Scene.prototype.removeSprites = function () {
 Scene.prototype.passo = function(){
     this.limpar();
     this.cenario();
+    this.comportamento();
     this.mover(dt);
     this.desenhar();
     this.removeSprites();

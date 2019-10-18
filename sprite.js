@@ -7,7 +7,7 @@ function Sprite(params = {}) {
         w: 0, // Largura do Sprite
         h: 0, // Altura do Sprite
         props: {}, // Propriedades do Sprite
-        comportar: undefined,
+        comportamento: undefined,
         scene: undefined
     }
     Object.assign(this, exemplo, params);
