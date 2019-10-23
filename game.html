@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="Sprite.js"></script>
     <script src="Scene.js"></script>
+    <script src="AssetsManager.js"></script>
     <title>Game</title>
 </head>
 <body>
@@ -12,6 +13,9 @@
 
     <script>
         // Variáveis
+        var assetsMng = new AssetsManager();
+        assetsMng.loadImage("personagem", "Assets/player_9mmhandgun.png")
+
         var canvas = document.querySelector("canvas");
         canvas.width = 600;
         canvas.height = 400;
@@ -19,8 +23,8 @@
         var dt, anterior = 0;
         var controle = { esquerda: 0, cima: 0, direita: 0, baixo: 0 };
 
-        var personagem = new Sprite({x:10, y:10, vx:10, vy:0, w:20, h:20, comportamento: Controlar(controle)});
-        var cena = new Scene({w:canvas.widht, h:canvas.height, ctx:ctx});
+        var cena = new Scene({w:canvas.widht, h:canvas.height, ctx:ctx, assets: assetsMng});
+        var personagem = new Sprite({w:20, h:20, x:30, y: canvas.height/2 - 10, vx:10, vy:0, Scene: cena, comportamento: Controlar(controle)});
         cena.desenhar();
 
         cena.adicionar(personagem);
@@ -93,7 +97,9 @@
         // Loop
         function passo(t){
             dt = (t - anterior)/1000;
-            cena.passo(dt);
+            if(assetsMng.progresso()===100){
+                cena.passo(dt);
+            }
             anterior = t;
             requestAnimationFrame(passo);
         }

@@ -16,11 +16,16 @@ Sprite.prototype = new Sprite();
 Sprite.prototype.constructor = Sprite;
 
 Sprite.prototype.desenhar = function(ctx){
-    ctx.fillStyle = "blue";
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 1;
-    ctx.fillRect(this.x, this.y, this.w, this.h);
-    ctx.strokeRect(this.x, this.y, this.w, this.h);
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.drawImage(
+        this.scene.assets.img("personagem"),
+        -this.w,
+        -this.h,
+        this.w*3,
+        this.h*3 
+    );
+    ctx.restore();
 }
 
 Sprite.prototype.mover = function (dt) {

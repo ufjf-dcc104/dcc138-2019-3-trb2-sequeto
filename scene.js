@@ -4,7 +4,8 @@ function Scene(params) {
         toRemove: [],
         ctx: null,
         w: 300,
-        h: 300
+        h: 300,
+        assets: null
     }
 
     Object.assign(this, exemplo, params);
@@ -14,7 +15,8 @@ Scene.prototype = new Scene();
 Scene.prototype.constructor = Scene;
 
 Scene.prototype.adicionar = function(sprite){
-    this.sprites.push(sprite);    
+    this.sprites.push(sprite);
+    sprite.scene = this; 
 }
 
 Scene.prototype.desenhar = function(){
