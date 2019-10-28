@@ -2,6 +2,9 @@ function Sprite(params = {}) {
     var exemplo = {
         x: 0, // Posição em x
         y: 0, // Posição em y
+        size: 64, // tamanho
+        frame: 0,
+        posicao: 704,
         vx: 0, // Velocidade no eixo x
         vy: 0, // Velocidade no eixo y
         w: 0, // Largura do Sprite
@@ -20,10 +23,14 @@ Sprite.prototype.desenhar = function(ctx){
     ctx.translate(this.x, this.y);
     ctx.drawImage(
         this.scene.assets.img("personagem"),
-        -this.w,
-        -this.h,
-        this.w*3,
-        this.h*3 
+        this.frame,
+        this.posicao,
+        this.size,
+        this.size,
+        -this.size / 2,
+        1 - this.size,
+        this.size,
+        this.size
     );
     ctx.restore();
 }

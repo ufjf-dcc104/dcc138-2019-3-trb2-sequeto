@@ -14,7 +14,7 @@
     <script>
         // Variáveis
         var assetsMng = new AssetsManager();
-        assetsMng.loadImage("personagem", "Assets/player_9mmhandgun.png")
+        assetsMng.loadImage("personagem", "Assets/personagem.png")
 
         var canvas = document.querySelector("canvas");
         canvas.width = 600;
@@ -35,17 +35,21 @@
                 // Botões Apertados
                 if (controle.cima) {
                     this.vy = -50;
+                    this.posicao = (8 * this.size) + (this.size * 0)
                 }
                 else
                 if (controle.baixo) {
                     this.vy = 50;
+                    this.posicao = (8 * this.size) + (this.size * 2)
                 }
 
                 if (controle.esquerda) {
                     this.vx = -50;
+                    this.posicao = (8 * this.size) + (this.size * 1)
                 }
                 if (controle.direita) {
                     this.vx = 50;
+                    this.posicao = (8 * this.size) + (this.size * 3)
                 }
 
                 // Botões Soltos
