@@ -60,14 +60,6 @@
                     this.frame = Math.floor(this.animacao / 5) * this.size;
                 } 
                 
-                if (controle.espaco) {
-                    this.animacao++;
-                    if (this.animacao >= 40){
-                         this.animacao = 0 
-                    };
-                    this.frame = Math.floor(this.animacao / 5) * this.size;
-                }
-                
                 else {
                     this.frame = 0;
                     this.animacao = 0;
