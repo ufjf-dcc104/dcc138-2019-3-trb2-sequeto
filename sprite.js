@@ -5,6 +5,7 @@ function Sprite(params = {}) {
         size: 64, // tamanho
         frame: 0,
         posicao: 704,
+        animacao: 0,
         vx: 0, // Velocidade no eixo x
         vy: 0, // Velocidade no eixo y
         w: 0, // Largura do Sprite
