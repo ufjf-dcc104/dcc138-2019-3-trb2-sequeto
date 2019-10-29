@@ -52,28 +52,14 @@
 
         function perseguir(alvo){
             return function () {
-                if (this.x === alvo.x) {
-                    if (this.y > alvo.y) {
-                        this.vy = 10 * Math.sign(alvo.y - this.y);
-                        this.posicao = (8 * this.size) + (this.size * 0)
-                    }
-
-                    else {
-                        this.vy = 10 * Math.sign(alvo.y - this.y);
-                        this.posicao = (8 * this.size) + (this.size * 2)
-                    }
+                if (this.x > alvo.x) {
+                    this.vx = 10 * Math.sign(alvo.x - this.x);
+                    this.posicao = (8 * this.size) + (this.size * 1)
                 }
 
-                if (this.y === alvo.y){
-                    if (this.x > alvo.x) {
-                        this.vx = 10 * Math.sign(alvo.x - this.x);
-                        this.posicao = (8 * this.size) + (this.size * 1)
-                    }
-
-                    else {
-                        this.vx = 10 * Math.sign(alvo.x - this.x);
-                        this.posicao = (8 * this.size) + (this.size * 3)
-                    }
+                if (this.x < alvo.x) {
+                    this.vx = 10 * Math.sign(alvo.x - this.x);
+                    this.posicao = (8 * this.size) + (this.size * 3)
                 }
 
                 if (this.y > alvo.y) {
@@ -84,16 +70,6 @@
                 if (this.y < alvo.y) {
                     this.vy = 10 * Math.sign(alvo.y - this.y);
                     this.posicao = (8 * this.size) + (this.size * 2)
-                }
-
-                if (this.x > alvo.x) {
-                    this.vx = 10 * Math.sign(alvo.x - this.x);
-                    this.posicao = (8 * this.size) + (this.size * 1)
-                }
-
-                if (this.x < alvo.x) {
-                    this.vx = 10 * Math.sign(alvo.x - this.x);
-                    this.posicao = (8 * this.size) + (this.size * 3)
                 }
 
                 this.animacao++;
