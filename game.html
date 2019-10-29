@@ -15,6 +15,7 @@
         // Variáveis
         var assetsMng = new AssetsManager();
         assetsMng.loadImage("personagem", "Assets/personagem.png")
+        assetsMng.loadImage("orc", "Assets/orc.png")
 
         var canvas = document.querySelector("canvas");
         canvas.width = 600;
@@ -24,12 +25,84 @@
         var controle = { esquerda: 0, cima: 0, direita: 0, baixo: 0, espaco: 0};
 
         var cena = new Scene({w:canvas.widht, h:canvas.height, ctx:ctx, assets: assetsMng});
-        var personagem = new Sprite({w:20, h:20, x:30, y: canvas.height/2 - 10, vx:10, vy:0, Scene: cena, comportamento: Controlar(controle)});
+        var personagem = new Sprite({w:20, h:20, x:30, y:canvas.height/2 - 10, vx:10, vy:0, Scene: cena, comportamento: Controlar(controle)});
+        var orcs = new Sprite({w:20, h:20, x:50, y:canvas.height/5 - 10, vx:10, vy:0, Scene: cena, comportamento: perseguir(personagem) , desenhar:desenhaOrc});
         cena.desenhar();
 
         cena.adicionar(personagem);
+        cena.adicionar(orcs);
 
         // Controle
+        function desenhaOrc(ctx){
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.drawImage(
+                this.scene.assets.img("orc"),
+                this.frame,
+                this.posicao,
+                this.size,
+                this.size,
+                -this.size / 2,
+                1 - this.size,
+                this.size,
+                this.size
+            );
+            ctx.restore();
+        }
+
+        function perseguir(alvo){
+            return function () {
+                if (this.x === alvo.x) {
+                    if (this.y > alvo.y) {
+                        this.vy = 10 * Math.sign(alvo.y - this.y);
+                        this.posicao = (8 * this.size) + (this.size * 0)
+                    }
+
+                    else {
+                        this.vy = 10 * Math.sign(alvo.y - this.y);
+                        this.posicao = (8 * this.size) + (this.size * 2)
+                    }
+                }
+
+                if (this.y === alvo.y){
+                    if (this.x > alvo.x) {
+                        this.vx = 10 * Math.sign(alvo.x - this.x);
+                        this.posicao = (8 * this.size) + (this.size * 1)
+                    }
+
+                    else {
+                        this.vx = 10 * Math.sign(alvo.x - this.x);
+                        this.posicao = (8 * this.size) + (this.size * 3)
+                    }
+                }
+
+                if (this.y > alvo.y) {
+                    this.vy = 10 * Math.sign(alvo.y - this.y);
+                    this.posicao = (8 * this.size) + (this.size * 0)
+                }
+
+                if (this.y < alvo.y) {
+                    this.vy = 10 * Math.sign(alvo.y - this.y);
+                    this.posicao = (8 * this.size) + (this.size * 2)
+                }
+
+                if (this.x > alvo.x) {
+                    this.vx = 10 * Math.sign(alvo.x - this.x);
+                    this.posicao = (8 * this.size) + (this.size * 1)
+                }
+
+                if (this.x < alvo.x) {
+                    this.vx = 10 * Math.sign(alvo.x - this.x);
+                    this.posicao = (8 * this.size) + (this.size * 3)
+                }
+
+                this.animacao++;
+                if (this.animacao >= 40){
+                    this.animacao = 0 
+                };
+                this.frame = Math.floor(this.animacao / 5) * this.size
+            }
+        }
         function Controlar(controle) {
             return function() {
                 // Botões Apertados
