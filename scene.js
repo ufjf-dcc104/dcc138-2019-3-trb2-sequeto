@@ -5,7 +5,8 @@ function Scene(params) {
         ctx: null,
         w: 300,
         h: 300,
-        assets: null
+        assets: null,
+        map: null,
     }
 
     Object.assign(this, exemplo, params);
@@ -61,9 +62,14 @@ Scene.prototype.removeSprites = function () {
     this.toRemove = [];
 };
 
+Scene.prototype.desenharMapa = function () {
+    this.map.desenhar(this.ctx);
+}
+
 Scene.prototype.passo = function(){
     this.limpar();
     this.cenario();
+    this.desenharMapa();
     this.comportamento();
     this.mover(dt);
     this.desenhar();
