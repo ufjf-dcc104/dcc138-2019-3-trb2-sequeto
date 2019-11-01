@@ -54,32 +54,32 @@ Sprite.prototype.aplicaRestricoes = function (dt) {
     dy = this.vy * dt;
     dny = dy;
     if (dx > 0 && this.scene.map.cells[this.mc + 1][this.ml].tipo != 0) {
-        dnx = this.scene.map.SIZE * (this.mc + 1) - (this.x + this.w / 2);
+        dnx = this.scene.map.SIZE * (this.mc + 1) - (this.x + this.w);
         dx = Math.min(dnx, dx);
     }
     if (dx < 0 && this.scene.map.cells[this.mc - 1][this.ml].tipo != 0) {
-        dnx = this.scene.map.SIZE * (this.mc - 1 + 1) - (this.x - this.w / 2);
+        dnx = this.scene.map.SIZE * (this.mc - 1 + 1) - (this.x - this.w);
         dx = Math.max(dnx, dx);
     }
     if (dy > 0 && this.scene.map.cells[this.mc][this.ml + 1].tipo != 0) {
-        dny = this.scene.map.SIZE * (this.ml + 1) - (this.y + this.h / 2);
+        dny = this.scene.map.SIZE * (this.ml + 1) - (this.y + this.h);
         dy = Math.min(dny, dy);
     }
     if (dy < 0 && this.scene.map.cells[this.mc][this.ml - 1].tipo != 0) {
-        dny = this.scene.map.SIZE * (this.ml - 1 + 1) - (this.y - this.h / 2);
+        dny = this.scene.map.SIZE * (this.ml - 1 + 1) - (this.y - this.h);
         dy = Math.max(dny, dy);
     }
 
     this.x = this.x + dx;
     this.y = this.y + dy;
 
-    var MAXX = this.scene.map.SIZE * this.scene.map.COLUMNS - this.w / 2;
-    var MAXY = this.scene.map.SIZE * this.scene.map.LINES - this.h / 2;
+    var MAXX = this.scene.map.SIZE * this.scene.map.COLUMNS;
+    var MAXY = this.scene.map.SIZE * this.scene.map.LINES;
 
-    if (this.x > MAXX) this.x = MAXX;
-    if (this.y > MAXY) {
-        this.y = MAXY;
-    }
-    if (this.x - this.w / 2 < 0) this.x = 0 + this.w / 2;
-    if (this.y - this.h / 2 < 0) this.y = 0 + this.h / 2;
+    if (this.x > MAXX) 
+        this.x = MAXX + this.w;
+    if (this.y > MAXY)
+        this.y = MAXY + this.h;
+    if (this.x - this.w < 0) this.x = 0;
+    if (this.y - this.h < 0) this.y = 0;
 }
