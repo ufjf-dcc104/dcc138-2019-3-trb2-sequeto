@@ -5,6 +5,7 @@ function Sprite(params = {}) {
         size: 64, // tamanho
         posicaox: 0,
         posicaoy: 704,
+        direcao:0,
         animacao: 0,
         vx: 0, // Velocidade no eixo x
         vy: 0, // Velocidade no eixo y
@@ -30,8 +31,8 @@ Sprite.prototype.desenhar = function(ctx){
         this.size,
         -this.size / 2,
         1 - this.size,
-        this.size/1.3,
-        this.size/1.3
+        this.size/1.2,
+        this.size/1.2
     );
     ctx.restore();
 }

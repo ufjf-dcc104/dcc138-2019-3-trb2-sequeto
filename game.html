@@ -30,14 +30,14 @@
             [
                 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
                 [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1],
                 [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
                 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
             ],
@@ -64,8 +64,8 @@
                 this.size,
                 -this.size / 2,
                 1 - this.size,
-                this.size/1.3,
-                this.size/1.3
+                this.size/1.2,
+                this.size/1.2
             );
             ctx.restore();
         }
@@ -104,21 +104,25 @@
                 // Botões Apertados
                 if (controle.cima) {
                     this.vy = -50;
-                    this.posicaoy = (8 * this.size) + (this.size * 0)
+                    this.posicaoy = (8 * this.size) + (this.size * 0);
+                    this.direcao = 0;
                 }
                 else
                 if (controle.baixo) {
                     this.vy = 50;
-                    this.posicaoy = (8 * this.size) + (this.size * 2)
+                    this.posicaoy = (8 * this.size) + (this.size * 2);
+                    this.direcao = 2;
                 }
 
                 if (controle.esquerda) {
                     this.vx = -50;
-                    this.posicaoy = (8 * this.size) + (this.size * 1)
+                    this.posicaoy = (8 * this.size) + (this.size * 1);
+                    this.direcao = 1;
                 }
                 if (controle.direita) {
                     this.vx = 50;
-                    this.posicaoy = (8 * this.size) + (this.size * 3)
+                    this.posicaoy = (8 * this.size) + (this.size * 3);
+                    this.direcao = 3;
                 }
 
                 if (controle.esquerda || controle.direita || controle.cima || controle.baixo) {
@@ -143,6 +147,9 @@
                     this.vx = 0;
                 }
             }
+        }
+
+        function atacar(){
         }
 
         // Escuta das controle
