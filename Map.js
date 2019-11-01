@@ -1,8 +1,8 @@
 function Map(modelo) {
     exemplo = {
         cells: [],
-        LINES: 32,
-        COLUMNS: 32,
+        LINES: 10,
+        COLUMNS: 10,
         SIZE: 32,
         scene: undefined,
         assets: undefined
@@ -27,20 +27,22 @@ Map.prototype.desenhar = function (ctx) {
     var cor = "black";
     for (var c = 0; c < this.COLUMNS; c++) {
         for (var l = 0; l < this.LINES; l++) {
-            switch (this.cells[c][l].tipo) {
-                case 0:
-                    cor = "gray";
-                    break;
+                switch (this.cells[c][l].tipo) {
                 case 1:
-                    cor = "red";
+                    ctx.drawImage(this.scene.assets.img("cenario"),
+                        24 * 32,
+                        15 * 32,
+                        96,
+                        96,
+                        c * this.SIZE,
+                        l * this.SIZE,
+                        this.SIZE,
+                        this.SIZE
+                    );
                     break;
                 default:
-                    cor = "blue";
+                        cor = "black";
             }
-            ctx.fillStyle = cor;
-            ctx.fillRect(c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
-            ctx.strokeStyle = "black";
-            ctx.strokeRect(c * this.SIZE, l * this.SIZE, this.SIZE, this.SIZE);
         }
     }
 }

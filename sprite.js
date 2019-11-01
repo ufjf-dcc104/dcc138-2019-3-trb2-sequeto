@@ -3,8 +3,8 @@ function Sprite(params = {}) {
         x: 0, // Posição em x
         y: 0, // Posição em y
         size: 64, // tamanho
-        frame: 0,
-        posicao: 704,
+        posicaox: 0,
+        posicaoy: 704,
         animacao: 0,
         vx: 0, // Velocidade no eixo x
         vy: 0, // Velocidade no eixo y
@@ -24,8 +24,8 @@ Sprite.prototype.desenhar = function(ctx){
     ctx.translate(this.x, this.y);
     ctx.drawImage(
         this.scene.assets.img("personagem"),
-        this.frame,
-        this.posicao,
+        this.posicaox,
+        this.posicaoy,
         this.size,
         this.size,
         -this.size / 2,
@@ -69,7 +69,7 @@ Sprite.prototype.aplicaRestricoes = function (dt) {
         dny = this.scene.map.SIZE * (this.ml - 1 + 1) - (this.y - this.h / 2);
         dy = Math.max(dny, dy);
     }
-    this.vy = dy / dt;
+
     this.x = this.x + dx;
     this.y = this.y + dy;
 
@@ -79,7 +79,6 @@ Sprite.prototype.aplicaRestricoes = function (dt) {
     if (this.x > MAXX) this.x = MAXX;
     if (this.y > MAXY) {
         this.y = MAXY;
-        this.vy = 0;
     }
     if (this.x - this.w / 2 < 0) this.x = 0 + this.w / 2;
     if (this.y - this.h / 2 < 0) this.y = 0 + this.h / 2;

@@ -17,6 +17,7 @@
         var assetsMng = new AssetsManager();
         assetsMng.loadImage("personagem", "Assets/personagem.png");
         assetsMng.loadImage("orc", "Assets/orc.png");
+        assetsMng.loadImage("cenario", "Assets/terrain.png");
 
         var canvas = document.querySelector("canvas");
         canvas.width = 600;
@@ -55,8 +56,8 @@
             ctx.translate(this.x, this.y);
             ctx.drawImage(
                 this.scene.assets.img("orc"),
-                this.frame,
-                this.posicao,
+                this.posicaox,
+                this.posicaoy,
                 this.size,
                 this.size,
                 -this.size / 2,
@@ -71,29 +72,29 @@
             return function () {
                 if (this.x > alvo.x) {
                     this.vx = 10 * Math.sign(alvo.x - this.x);
-                    this.posicao = (8 * this.size) + (this.size * 1)
+                    this.posicaoy = (8 * this.size) + (this.size * 1)
                 }
 
                 if (this.x < alvo.x) {
                     this.vx = 10 * Math.sign(alvo.x - this.x);
-                    this.posicao = (8 * this.size) + (this.size * 3)
+                    this.posicaoy = (8 * this.size) + (this.size * 3)
                 }
 
                 if (this.y > alvo.y) {
                     this.vy = 10 * Math.sign(alvo.y - this.y);
-                    this.posicao = (8 * this.size) + (this.size * 0)
+                    this.posicaoy = (8 * this.size) + (this.size * 0)
                 }
 
                 if (this.y < alvo.y) {
                     this.vy = 10 * Math.sign(alvo.y - this.y);
-                    this.posicao = (8 * this.size) + (this.size * 2)
+                    this.posicaoy = (8 * this.size) + (this.size * 2)
                 }
 
                 this.animacao++;
                 if (this.animacao >= 40){
                     this.animacao = 0 
                 };
-                this.frame = Math.floor(this.animacao / 5) * this.size
+                this.posicaox = Math.floor(this.animacao / 5) * this.size
             }
         }
         function Controlar(controle) {
@@ -101,21 +102,21 @@
                 // Botões Apertados
                 if (controle.cima) {
                     this.vy = -50;
-                    this.posicao = (8 * this.size) + (this.size * 0)
+                    this.posicaoy = (8 * this.size) + (this.size * 0)
                 }
                 else
                 if (controle.baixo) {
                     this.vy = 50;
-                    this.posicao = (8 * this.size) + (this.size * 2)
+                    this.posicaoy = (8 * this.size) + (this.size * 2)
                 }
 
                 if (controle.esquerda) {
                     this.vx = -50;
-                    this.posicao = (8 * this.size) + (this.size * 1)
+                    this.posicaoy = (8 * this.size) + (this.size * 1)
                 }
                 if (controle.direita) {
                     this.vx = 50;
-                    this.posicao = (8 * this.size) + (this.size * 3)
+                    this.posicaoy = (8 * this.size) + (this.size * 3)
                 }
 
                 if (controle.esquerda || controle.direita || controle.cima || controle.baixo) {
@@ -123,11 +124,11 @@
                     if (this.animacao >= 40){
                          this.animacao = 0 
                     };
-                    this.frame = Math.floor(this.animacao / 5) * this.size;
+                    this.posicaox = Math.floor(this.animacao / 5) * this.size;
                 } 
                 
                 else {
-                    this.frame = 0;
+                    this.posicaox = 0;
                     this.animacao = 0;
                 }
 
