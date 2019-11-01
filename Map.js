@@ -28,12 +28,24 @@ Map.prototype.desenhar = function (ctx) {
     for (var c = 0; c < this.COLUMNS; c++) {
         for (var l = 0; l < this.LINES; l++) {
                 switch (this.cells[c][l].tipo) {
-                case 1:
+                case 0:
                     ctx.drawImage(this.scene.assets.img("cenario"),
                         24 * 32,
                         15 * 32,
-                        96,
-                        96,
+                        32,
+                        32,
+                        c * this.SIZE,
+                        l * this.SIZE,
+                        this.SIZE,
+                        this.SIZE
+                    );
+                    break;
+                case 1:
+                    ctx.drawImage(this.scene.assets.img("cenario"),
+                        29 * 32,
+                        20 * 32,
+                        32,
+                        32,
                         c * this.SIZE,
                         l * this.SIZE,
                         this.SIZE,
