@@ -30,14 +30,14 @@
             [
                 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
                 [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1],
-                [1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
                 [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
                 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
             ],
@@ -45,12 +45,26 @@
 
         var cena = new Scene({w:canvas.widht, h:canvas.height, ctx:ctx, assets: assetsMng, map: mapa});
         mapa.scene = cena;
-        var personagem = new Sprite({w:20, h:20, x:30, y:canvas.height/2 - 10, vx:10, vy:0, Scene: cena, comportamento: Controlar(controle)});
-        var orcs = new Sprite({w:20, h:20, x:50, y:canvas.height/5 - 10, vx:10, vy:0, Scene: cena, comportamento: perseguir(personagem) , desenhar:desenhaOrc});
+        var personagem = new Sprite({w:20, h:20, x:50, y:canvas.height/2 - 10, vx:10, vy:0, Scene: cena, comportamento: Controlar(controle)});
         cena.desenhar();
 
         cena.adicionar(personagem);
-        cena.adicionar(orcs);
+
+        for (let i = 0; i < 10; i++) {
+            var orcs = new Sprite({
+                w:20, 
+                h:20, 
+                x:Math.random()*(canvas.width+50), 
+                y:Math.random()*(canvas.height+50), 
+                vx:10, 
+                vy:0, 
+                Scene: cena, 
+                comportamento: perseguir(personagem), 
+                desenhar:desenhaOrc
+            });
+            cena.adicionar(orcs);
+        }
+        
 
         // Controle
         function desenhaOrc(ctx){
@@ -73,22 +87,22 @@
         function perseguir(alvo){
             return function () {
                 if (this.x > alvo.x) {
-                    this.vx = 10 * Math.sign(alvo.x - this.x);
+                    this.vx = (Math.random()*10) * Math.sign(alvo.x - this.x);
                     this.posicaoy = (8 * this.size) + (this.size * 1)
                 }
 
                 if (this.x < alvo.x) {
-                    this.vx = 10 * Math.sign(alvo.x - this.x);
+                    this.vx = (Math.random()*10) * Math.sign(alvo.x - this.x);
                     this.posicaoy = (8 * this.size) + (this.size * 3)
                 }
 
                 if (this.y > alvo.y) {
-                    this.vy = 10 * Math.sign(alvo.y - this.y);
+                    this.vy = (Math.random()*10) * Math.sign(alvo.y - this.y);
                     this.posicaoy = (8 * this.size) + (this.size * 0)
                 }
 
                 if (this.y < alvo.y) {
-                    this.vy = 10 * Math.sign(alvo.y - this.y);
+                    this.vy = (Math.random()*10) * Math.sign(alvo.y - this.y);
                     this.posicaoy = (8 * this.size) + (this.size * 2)
                 }
 
