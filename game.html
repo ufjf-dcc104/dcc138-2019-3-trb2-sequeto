@@ -16,7 +16,7 @@
         // Variáveis
         var assetsMng = new AssetsManager();
         assetsMng.loadImage("personagem", "Assets/personagem.png");
-        assetsMng.loadImage("orc", "Assets/orc.png");
+        //assetsMng.loadImage("orc", "Assets/orc.png");
         assetsMng.loadImage("cenario", "Assets/terrain.png");
 
         var canvas = document.querySelector("canvas");
@@ -50,7 +50,7 @@
 
         cena.adicionar(personagem);
 
-        for (let i = 0; i < 10; i++) {
+        /*for (let i = 0; i < 10; i++) {
             var orcs = new Sprite({
                 w:20, 
                 h:20, 
@@ -63,7 +63,7 @@
                 desenhar:desenhaOrc
             });
             cena.adicionar(orcs);
-        }
+        }*/
         
 
         // Controle
@@ -139,13 +139,17 @@
                     this.direcao = 3;
                 }
 
+                if(controle.espaco){
+                    ataque(dt);
+                }
+
                 if (controle.esquerda || controle.direita || controle.cima || controle.baixo) {
                     this.animacao++;
                     if (this.animacao >= 40){
                          this.animacao = 0 
                     };
                     this.posicaox = Math.floor(this.animacao / 5) * this.size;
-                } 
+                }
                 
                 else {
                     this.posicaox = 0;
@@ -163,8 +167,32 @@
             }
         }
 
-        function atacar(){
+        function ataque(dt) {
+            tempoAtaque = 2;
+            while (tempoAtaque > 0) {
+                this.posicaoy = (4 * this.size) + (this.size * 0);
+                this.posicaox = Math.floor(this.animacao / 5) * this.size;
+                ctx.drawImage(
+                    this.scene.assets.img("personagem"),
+                    this.posicaox,
+                    this.posicaoy,
+                    this.size,
+                    this.size,
+                    -this.size / 2,
+                    1 - this.size,
+                    this.size/1.2,
+                    this.size/1.2
+                );
+
+                this.animacao++;
+                if (this.animacao >= 40){
+                    this.animacao = 0 
+                };
+
+                tempoAtaque = tempoAtaque - dt;
+            }
         }
+
 
         // Escuta das controle
         addEventListener("keydown", function (e) {
