@@ -7,6 +7,7 @@ function Scene(params) {
         h: 300,
         assets: null,
         map: null,
+        fase: 1
     }
 
     Object.assign(this, exemplo, params);
@@ -66,12 +67,70 @@ Scene.prototype.desenharMapa = function () {
     this.map.desenhar(this.ctx);
 }
 
-Scene.prototype.passo = function(){
+Scene.prototype.checaColisao = function(){
+    for(var i = 0; i<this.sprites.length; i++){
+        for(var j = i+1; j<this.sprites.length; j++){
+            if(this.sprites[i].atingiu(this.sprites[j])){
+                if(this.sprites[i].props.tipo === "pc" && this.sprite[j].props.tipo === "npc"){
+                    this.toRemove.push(this.sprites[j]);
+                }
+            }
+        }
+    }  
+};
+/*Scene.prototype.inicio = function(){
+    function iniciar(){
+        this.fase = 1;
+    }
+}
+
+Scene.prototype.fim = function(){
+    ctx.fillStyle = "red";
+    ctx.strokeStyle = "red";
+    ctx.font = "35px bold monospaced";
+    ctx.fillText("Game Over", 300, 150);
+    ctx.strokeText("Game Over", 300, 150);
+}*/
+
+Scene.prototype.passo = function () {
+    switch (this.fase) {
+        case 1:
+            this.passo1();
+            break;
+    
+        /*case 2:
+            this.inicio();
+            break;*/
+
+        /*case 3:
+            this.fim();
+            break;*/
+    }
+}
+
+Scene.prototype.passo1 = function(){
     this.limpar();
     this.cenario();
     this.desenharMapa();
     this.comportamento();
     this.mover(dt);
     this.desenhar();
+    this.checaColisao();
     this.removeSprites();
 }
+
+/*Scene.prototype.inicio = function () {
+    this.limpar();
+    this.desenharMapa();
+    this.desenhar();
+    this.inicio();
+}*/
+
+/*Scene.prototype.fim = function () {
+    this.limpar();
+    this.desenhaCenario();
+    this.desenhar();
+    this.gameOver();
+    this.pontuacao();
+    
+}*/

@@ -41,13 +41,13 @@ Sprite.prototype.mover = function (dt) {
     this.x = this.x + this.vx * dt;
     this.y = this.y + this.vy * dt;
 
-    this.mc = Math.floor(this.x / this.scene.map.SIZE);
+    /*this.mc = Math.floor(this.x / this.scene.map.SIZE);
     this.ml = Math.floor(this.y / this.scene.map.SIZE);
     
-    this.aplicaRestricoes(dt);
+    this.aplicaRestricoes(dt);*/
 }
 
-Sprite.prototype.aplicaRestricoes = function (dt) {
+/*Sprite.prototype.aplicaRestricoes = function (dt) {
     var dnx;
     var dx;
     dx = this.vx * dt;
@@ -83,4 +83,17 @@ Sprite.prototype.aplicaRestricoes = function (dt) {
         this.y = MAXY + this.h;
     if (this.x - this.w < 0) this.x = 0;
     if (this.y - this.h < 0) this.y = 0;
+}*/
+
+Sprite.prototype.atingiu = function (alvo) {
+    if (alvo.x + alvo.w < this.x)
+        return false;
+    if (alvo.x > this.x + this.w)
+        return false;
+    if (alvo.y + alvo.w < this.y)
+        return false;
+    if (alvo.y > this.y + this.h)
+        return false;
+
+    return true;
 }

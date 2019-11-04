@@ -16,7 +16,7 @@
         // Variáveis
         var assetsMng = new AssetsManager();
         assetsMng.loadImage("personagem", "Assets/personagem.png");
-        //assetsMng.loadImage("orc", "Assets/orc.png");
+        assetsMng.loadImage("orc", "Assets/orc.png");
         assetsMng.loadImage("cenario", "Assets/terrain.png");
 
         var canvas = document.querySelector("canvas");
@@ -45,25 +45,26 @@
 
         var cena = new Scene({w:canvas.widht, h:canvas.height, ctx:ctx, assets: assetsMng, map: mapa});
         mapa.scene = cena;
-        var personagem = new Sprite({w:20, h:20, x:50, y:canvas.height/2 - 10, vx:10, vy:0, Scene: cena, comportamento: Controlar(controle)});
+        var personagem = new Sprite({w:20, h:20, x:50, y:canvas.height/2 - 10, vx:10, vy:0, Scene: cena, comportamento: Controlar(controle), props:{tipo: "pc"}});
         cena.desenhar();
 
         cena.adicionar(personagem);
 
-        /*for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 10; i++) {
             var orcs = new Sprite({
                 w:20, 
                 h:20, 
-                x:Math.random()*(canvas.width+50), 
-                y:Math.random()*(canvas.height+50), 
+                x:Math.random()*(canvas.width), 
+                y:Math.random()*(canvas.height), 
                 vx:10, 
                 vy:0, 
                 Scene: cena, 
                 comportamento: perseguir(personagem), 
-                desenhar:desenhaOrc
+                desenhar:desenhaOrc,
+                props:{tipo: "npc"}
             });
             cena.adicionar(orcs);
-        }*/
+        }
         
 
         // Controle
